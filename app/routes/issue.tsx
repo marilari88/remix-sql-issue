@@ -1,9 +1,4 @@
-import {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  json,
-  redirect,
-} from "@remix-run/node";
+import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { z } from "zod";
 import { prisma } from "~/db.server";
@@ -53,7 +48,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   return redirect("/issue");
 };
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader() {
   const data = await prisma.issue.findMany();
   const issues = IssueListSchema.parse(data);
   return json({ issues });
