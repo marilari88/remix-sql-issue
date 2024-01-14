@@ -10,8 +10,11 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <Link to="issue">Issue</Link>
+    <div className="p-4 flex flex-col gap-2">
+      <h2 className="text-md font-bold">Navigation menu</h2>
+      <Link to="issue" className="hover:underline">
+        Issue
+      </Link>
     </div>
   );
 }
