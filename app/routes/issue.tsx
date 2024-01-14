@@ -23,9 +23,12 @@ const InsertIssueSchema = z.object({
 
 function IssueList({ issues }: { issues: IssueList }) {
   return (
-    <div>
+    <div className="grid md:grid-cols-2 gap-4">
       {issues.map((issue) => (
-        <div key={issue.id}>
+        <div
+          key={issue.id}
+          className="flex flex-col gap-2 border p-4 rounded-md bg-amber-50"
+        >
           <h2>{issue.title}</h2>
           <p>{issue.description}</p>
           <p>{issue.draftId}</p>
@@ -58,20 +61,37 @@ export default function Issue() {
   const { issues } = useLoaderData<typeof loader>();
   const error = useActionData<typeof action>();
   return (
-    <div>
-      <IssueList issues={issues} />
-      {error && <div>{error.message}</div>}
-      <Form method="POST">
+    <div className="p-10 flex flex-col gap-10">
+      <h1 className="text-3xl font-medium">Add a new issue</h1>
+      <Form method="POST" className="flex flex-col gap-2">
         <div>Draft id</div>
-        <input type="text" name="draftId" />
+        <input
+          type="text"
+          name="draftId"
+          className="border border-neutral-300 rounded-md p-2"
+        />
         <div>Title</div>
-        <input type="text" name="title" />
+        <input
+          type="text"
+          name="title"
+          className="border border-neutral-300 rounded-md p-2"
+        />
         <div>Description</div>
-        <input type="description" name="description" />
-        <button type="submit" value="Submit">
+        <input
+          type="description"
+          name="description"
+          className="border border-neutral-300 rounded-md p-2"
+        />
+        <button
+          type="submit"
+          value="Submit"
+          className="p-3 bg-amber-400 rounded-md text-sm font-medium"
+        >
           Aggiungi
         </button>
+        {error && <div className="text-red-500">{error.message}</div>}
       </Form>
+      <IssueList issues={issues} />
     </div>
   );
 }
